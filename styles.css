@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.nav {
+  max-width: 960px;
+  width: 100%;
+  padding: 10px;
+  background-color: #58a399;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav .logo {
+  font-size: 16px;
+  padding: 2px 5px;
+  font-weight: bold;
+  border: 2px dotted #fff;
+  border-radius: 5px;
+  color: #fff;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.nav .logo span {
+  font-size: 22px;
+  display: block;
+  letter-spacing: 3px;
+}
+
+.nav .addBookBtn {
+  display: inline-block;
+  outline: 2px solid #fff;
+  border: none;
+  color: #fff;
+  padding: 7px 14px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 7px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.nav .addBookBtn:hover {
+  outline-offset: 3px;
+}
+
+.booksContainer {
+  max-width: 960px;
+  width: 100%;
+  min-height: 85vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.booksContainer .book {
+  min-width: 230px;
+  max-width: 306.672px;
+  padding: 5px 10px;
+  background-color: #fff;
+  border-radius: 7px;
+  box-shadow: 0 0 6px 2px #58a399;
+  flex: 1;
+  transition: all 0.3s;
+}
+
+.booksContainer .book .bookHeader .title {
+  color: #496989;
+  font-size: 24px;
+  text-align: center;
+}
+
+.booksContainer .book .bookHeader .author {
+  font-size: 16px;
+  font-style: italic;
+  text-align: center;
+  color: rgb(129, 128, 128);
+  padding-bottom: 10px;
+  border-bottom: 2px solid #496989;
+  margin-bottom: 60px;
+}
+
+.booksContainer .book .bookHeader .moreInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #496989;
+}
+.booksContainer .book .btnWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.booksContainer .book .btnWrapper .btn {
+  display: inline-block;
+  padding: 7px 14px;
+  background-color: #496989;
+  border-radius: 5px;
+  border: 1px solid #496989;
+  cursor: pointer;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.booksContainer .book .btnWrapper .btn:nth-child(1),
+.booksContainer .book .btnWrapper .btn.not-read {
+  background-color: #fff;
+  color: #496989;
+}
+
+.booksContainer .book .btnWrapper .btn:hover:nth-child(1) {
+  background-color: #ff8080;
+  color: #fff;
+  border-color: #ff8080;
+}
+
+/* dialog box styles */
+
+#dialog {
+  width: 400px;
+  position: absolute;
+  color: #496989;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 7px;
+  padding: 10px;
+  border: none;
+  box-shadow: 0 0 24px 3px #496989;
+}
+
+#dialog form button[aria-label="close"] {
+  float: right;
+  padding: 0 3px;
+  cursor: pointer;
+  color: #496989;
+  border: 1px solid #496989;
+}
+
+#dialog form button[aria-label="close"]:hover {
+  background-color: #496989;
+  color: #fff;
+}
+
+#dialog form .dialogHeading {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0 20px;
+}
+
+#dialog form p {
+  margin-bottom: 15px;
+}
+#dialog form p:nth-of-type(6) {
+  display: flex;
+}
+
+#dialog form p label {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+#dialog form p input[type="text"],
+#dialog form p input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid gray;
+}
+
+#dialog form p [input="checkbox"]:checked {
+  background-color: #496989;
+  color: #496989;
+}
+
+#dialog form div {
+  display: flex;
+  justify-content: center;
+}
+#dialog form #confirmBtn {
+  display: inline-block;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #496989;
+  color: #496989;
+  border-radius: 5px;
+}
+
+#dialog form #confirmBtn:hover {
+  background-color: #496989;
+  color: #fff;
+}
+
+#dialog::backdrop {
+  backdrop-filter: blur(5px);
+}

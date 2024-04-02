@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="nav">
+        <p class="logo"><a href="#">Good Reads <span>Library</span></a></p>
+        <input type="search" name="search" id="">
+        <button class="addBookBtn">+ Add Book</button>
+    </div>
+
+    <!-- dialog modal starts-->
+    <dialog id="dialog">
+        <form method="dialog">
+            <button type="submit" aria-label="close" formnovalidate>X</button>
+            <P class="dialogHeading">Add a Book</P>
+            <p>
+                <label>
+                    Title:
+                    <input type="text" name="title" id="modalTitle" autofocus required>
+                </label>
+            </p>
+            <p>
+                <label>
+                    Author:
+                    <input type="text" name="author" id="modalAuthor" required>
+                </label>
+            </p>
+            <p>
+                <label>
+                    Pages:
+                    <input type="number" min="0" name="page" id="modalPage" required>
+                </label>
+            </p>
+            <p>
+                <label>
+                    Rating:
+                    <input type="number" min="0" max="5" step=".01" name="rating" id="modalRating" required>
+                </label>
+            </p>
+
+            <p>
+                <label for="modalRead">
+                    Have you read it?
+                </label>
+                <input type="checkbox" name="read" id="modalRead">
+            </p>
+
+
+            <div>
+
+                <button type="submit" id="confirmBtn" value="">Submit</button>
+            </div>
+        </form>
+    </dialog>
+    <!-- dialog modal ends-->
+
+    <div class="booksContainer" id="books">
+
+    </div>
+    <script src="./app.js"></script>
+</body>
+
+</html>
