@@ -1,7 +1,7 @@
 const myLibrary = [];
 
 const booksContainer = document.querySelector(".booksContainer");
-window.addEventListener("DOMContentLoaded", listAllBooks);
+window.addEventListener("DOMContentLoaded", render);
 
 //constructor
 function Book({ title, author, pages, rating, read }) {
@@ -19,36 +19,23 @@ Book.prototype.toggle = function () {
   this.read = !this.read;
 };
 
+//main functions
 function addBookToLibrary(obj) {
   myLibrary.push(new Book(obj));
-  listAllBooks();
+  render();
 }
 
 function deleteBookFromLibrary(id) {
   if (confirm("Do you really want to delete it?")) {
     myLibrary.splice(id, 1);
-    listAllBooks();
+    render();
   }
 }
 
-function listAllBooks() {
+function render() {
   const bookCards = getBookCards();
   booksContainer.innerHTML = bookCards;
-  const Btns = document.querySelectorAll(".btn");
-  Btns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      //remove btn clicked
-      if (btn.textContent === "remove") {
-        let id = Number(e.target.parentElement.parentElement.dataset.id);
-        deleteBookFromLibrary(id);
-        // read/not-read btn clicked
-      } else {
-        let bookIndex = e.target.parentElement.parentElement.dataset.id;
-        let book = myLibrary[bookIndex];
-        toggleReadStatus(e, book);
-      }
-    });
-  });
+  handleCardEvents();
 }
 
 //helper functions
@@ -75,7 +62,8 @@ function getBookCards() {
     })
     .join(" ");
 }
-function toggleReadStatus(e, book) {
+function toggleReadStatus(e, id) {
+  let book = myLibrary[id];
   book.toggle();
   e.target.textContent = getReadStatus(book.read);
   if (book.read) e.target.classList.remove("not-read");
@@ -85,6 +73,19 @@ function toggleReadStatus(e, book) {
 function getReadStatus(readValue) {
   if (readValue) return "read";
   else return "not read";
+}
+
+function handleCardEvents() {
+  const Btns = document.querySelectorAll(".btn");
+  Btns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let id = e.target.parentElement.parentElement.dataset.id;
+      //remove btn clicked
+      if (btn.textContent === "remove") deleteBookFromLibrary(id);
+      // read/not-read btn clicked
+      else toggleReadStatus(e, id);
+    });
+  });
 }
 
 //Library initialised with few books
@@ -142,7 +143,7 @@ closeDialogBtn.addEventListener("click", (e) => {
 
 submitDialogBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  if (checkForNull()) {
+  if (isNull()) {
     alert("Please fill all the fields");
     emptyFormField = false;
     return;
@@ -154,15 +155,15 @@ submitDialogBtn.addEventListener("click", (e) => {
 
 //helper functions
 function getFormData() {
-  return (newBook = {
+  return {
     title: document.getElementById("modalTitle").value,
     author: document.getElementById("modalAuthor").value,
     pages: document.getElementById("modalPage").value,
     rating: document.getElementById("modalRating").value,
     read: document.getElementById("modalRead").checked,
-  });
+  };
 }
-function checkForNull() {
+function isNull() {
   if (!document.getElementById("modalTitle").value) emptyFormField = true;
   if (!document.getElementById("modalAuthor").value) emptyFormField = true;
   if (!document.getElementById("modalPage").value) emptyFormField = true;
