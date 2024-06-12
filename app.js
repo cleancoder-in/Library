@@ -34,13 +34,13 @@ function deleteBookFromLibrary(id) {
 }
 
 function render() {
-  const bookCards = getBookCards();
+  const bookCards = createBookCards();
   booksContainer.innerHTML = bookCards;
-  handleCardEvents();
+  cardEventsHandler();
 }
 
 //helper functions
-function getBookCards() {
+function createBookCards() {
   return myLibrary
     .map((book, index) => {
       let { title, author, pages, rating, read } = book;
@@ -76,7 +76,7 @@ function getReadStatus(readValue) {
   else return "not read";
 }
 
-function handleCardEvents() {
+function cardEventsHandler() {
   const Btns = document.querySelectorAll(".btn");
   Btns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
