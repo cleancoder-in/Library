@@ -3,24 +3,22 @@ const myLibrary = [];
 const booksContainer = document.querySelector(".booksContainer");
 window.addEventListener("DOMContentLoaded", render);
 
-//class
+//constructor function
 
-class Book {
-  constructor({ title, author, pages, rating, read }) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.rating = rating;
-    this.read = read;
-    this.info = function () {
-      return `${this.title} by ${this.author}, ${pages}, is ${read}`;
-    };
-  }
-
-  toggle() {
-    this.read = !this.read;
-  }
+function Book({ title, author, pages, rating, read }) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.rating = rating;
+  this.read = read;
+  this.info = function () {
+    return `${this.title} by ${this.author}, ${pages}, is ${read}`;
+  };
 }
+
+Book.prototype.toggle = function () {
+  this.read = !this.read;
+};
 
 //main functions
 function addBookToLibrary(obj) {
