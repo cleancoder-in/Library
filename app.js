@@ -1,36 +1,52 @@
-const myLibrary = [];
+// Class
+class Book {
+  constructor({ title, author, pages, rating, read }) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.rating = rating;
+    this.read = read;
+    this.info = function () {
+      return `${this.title} by ${this.author}, ${pages}, is ${read}`;
+    };
+  }
 
+  toggle() {
+    this.read = !this.read;
+  }
+}
+
+class Library {
+  constructor() {
+    this.books = [];
+  }
+
+  addBook(obj) {
+    this.books.push(new Book(obj));
+  }
+
+  deleteBook(id) {
+    if (confirm("Do you really want to delete it?")) {
+      this.books.splice(id, 1);
+    }
+  }
+}
+
+const myLibrary = new Library();
+
+// selection and rendering
 const booksContainer = document.querySelector(".booksContainer");
 window.addEventListener("DOMContentLoaded", render);
 
-//constructor function
-
-function Book({ title, author, pages, rating, read }) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.rating = rating;
-  this.read = read;
-  this.info = function () {
-    return `${this.title} by ${this.author}, ${pages}, is ${read}`;
-  };
-}
-
-Book.prototype.toggle = function () {
-  this.read = !this.read;
-};
-
 //main functions
 function addBookToLibrary(obj) {
-  myLibrary.push(new Book(obj));
+  myLibrary.addBook(obj);
   render();
 }
 
 function deleteBookFromLibrary(id) {
-  if (confirm("Do you really want to delete it?")) {
-    myLibrary.splice(id, 1);
-    render();
-  }
+  myLibrary.deleteBook(id);
+  render();
 }
 
 function render() {
@@ -41,7 +57,7 @@ function render() {
 
 //helper functions
 function createBookCards() {
-  return myLibrary
+  return myLibrary.books
     .map((book, index) => {
       let { title, author, pages, rating, read } = book;
       let classValue = "";
@@ -63,13 +79,6 @@ function createBookCards() {
     })
     .join(" ");
 }
-function toggleReadStatus(e, id) {
-  let book = myLibrary[id];
-  book.toggle();
-  e.target.textContent = getReadStatus(book.read);
-  if (book.read) e.target.classList.remove("not-read");
-  else e.target.classList.add("not-read");
-}
 
 function getReadStatus(readValue) {
   if (readValue) return "read";
@@ -89,7 +98,15 @@ function cardEventsHandler() {
   });
 }
 
-//Library initialised with few books
+function toggleReadStatus(e, id) {
+  let book = myLibrary.books[id];
+  book.toggle();
+  e.target.textContent = getReadStatus(book.read);
+  if (book.read) e.target.classList.remove("not-read");
+  else e.target.classList.add("not-read");
+}
+
+/********************* Library initialised with few books *******************/
 addBookToLibrary({
   title: "To Kill a Mockingbird",
   author: "Harper Lee",
@@ -122,7 +139,7 @@ addBookToLibrary({
   read: false,
 });
 
-/* dialog modal script */
+/******************** dialog modal script ***********************/
 //global variables
 let emptyFormField = false;
 let newBook = {};
