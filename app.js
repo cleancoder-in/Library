@@ -37,34 +37,34 @@ const myLibrary = new Library();
 // selection and rendering
 const booksContainer = document.querySelector(".booksContainer");
 const searchInputEl = document.querySelector(".search-input");
-window.addEventListener("DOMContentLoaded", render);
-searchInputEl.addEventListener("keydown", searchInputHandler);
+window.addEventListener("DOMContentLoaded", function () {
+  render(myLibrary.books);
+});
+searchInputEl.addEventListener("keyup", searchInputHandler);
 
 //main functions
 function addBookToLibrary(obj) {
   myLibrary.addBook(obj);
-  render();
+  render(myLibrary.books);
 }
 
 function deleteBookFromLibrary(id) {
   myLibrary.deleteBook(id);
-  render();
+  render(myLibrary.books);
 }
 
-function render() {
-  const bookCards = createBookCards();
+function render(booksArr) {
+  const bookCards = createBookCards(booksArr);
   booksContainer.innerHTML = bookCards;
   cardEventsHandler();
 }
 
 function searchInputHandler(e) {
-  //enter key
-  if (e.code === "Enter") {
-    myLibrary.books = myLibrary.books.filter((book) =>
-      book.title.toLowerCase().includes(searchInputEl.value.toLowerCase())
-    );
-    render();
-  }
+  filteredBooks = myLibrary.books.filter((book) =>
+    book.title.toLowerCase().includes(searchInputEl.value.toLowerCase())
+  );
+  render(filteredBooks);
+
   //escape key
   if (e.code === "Escape") {
     searchInputEl.innerHTML = "";
@@ -72,8 +72,8 @@ function searchInputHandler(e) {
 }
 
 //helper functions
-function createBookCards() {
-  return myLibrary.books
+function createBookCards(arr) {
+  return arr
     .map((book, index) => {
       let { title, author, pages, rating, read } = book;
       let classValue = "";
