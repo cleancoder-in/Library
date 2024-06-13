@@ -36,7 +36,9 @@ const myLibrary = new Library();
 
 // selection and rendering
 const booksContainer = document.querySelector(".booksContainer");
+const searchInputEl = document.querySelector(".search-input");
 window.addEventListener("DOMContentLoaded", render);
+searchInputEl.addEventListener("keydown", searchInputHandler);
 
 //main functions
 function addBookToLibrary(obj) {
@@ -53,6 +55,20 @@ function render() {
   const bookCards = createBookCards();
   booksContainer.innerHTML = bookCards;
   cardEventsHandler();
+}
+
+function searchInputHandler(e) {
+  //enter key
+  if (e.code === "Enter") {
+    myLibrary.books = myLibrary.books.filter((book) =>
+      book.title.toLowerCase().includes(searchInputEl.value.toLowerCase())
+    );
+    render();
+  }
+  //escape key
+  if (e.code === "Escape") {
+    searchInputEl.innerHTML = "";
+  }
 }
 
 //helper functions
