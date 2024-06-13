@@ -6,13 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <script src="https://kit.fontawesome.com/120a148ff9.js" crossorigin="anonymous"></script> -->
 </head>
 
 <body>
     <div class="nav">
-        <p class="logo"><a href="#">Good Reads <span>Library</span></a></p>
-        <input type="search" name="search" id="">
+        <p class="logo"><a href="#">Library</a></p>
+        <input type="search" name="search" id="search-input" placeholder="Search...">
         <button class="addBookBtn">+ Add Book</button>
+    </div>
+
+    <div class="booksContainer" id="books">
+    </div>
+
+    <div class="footer">
+        <p>
+            Copyright ©
+            <script>
+                document.write(new Date().getFullYear())
+            </script>
+            cleancoder-in
+        </p>
+        <a href="https://github.com/cleancoder-in" target="_blank">
+            <i class="fa-brands fa-github"></i></a>
     </div>
 
     <!-- dialog modal starts-->
@@ -61,9 +80,7 @@
     </dialog>
     <!-- dialog modal ends-->
 
-    <div class="booksContainer" id="books">
 
-    </div>
     <script src="./app.js"></script>
 </body>
 
